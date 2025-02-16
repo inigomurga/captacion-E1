@@ -36,27 +36,27 @@ Una vez que tenemos la tabla con los datos, creamos un pipeline con tres etapas 
 ## Uso
 
 1. Accede a PostgreSQL:
-```bash
+    ```bash
     docker exec -it postgres psql -U usuario -d dbproyecto
-```
+    ```
 2. Crea la tabla:
-```bash
+    ```bash
     create table productos ( id integer primary key, nombre varchar(30), precio integer);
-```
+    ```
 3. Inserta los datos:
-```bash
+    ```bash
     insert into productos values  
-(1, 'Móvil', 750),
-(2, 'Auriculares', 120),
-(3, 'Portátil', 1200),
-(4, 'Monitor', 300),
-(5, 'Teclado', 50),
-(6, 'Ratón', 30),
-(7, 'Impresora', 200),
-(8, 'Tablet', 500),
-(9, 'Cámara', 900),
-(10, 'Altavoces', 150);
-```
+    (1, 'Móvil', 750),
+    (2, 'Auriculares', 120),
+    (3, 'Portátil', 1200),
+    (4, 'Monitor', 300),
+    (5, 'Teclado', 50),
+    (6, 'Ratón', 30),
+    (7, 'Impresora', 200),
+    (8, 'Tablet', 500),
+    (9, 'Cámara', 900),
+    (10, 'Altavoces', 150);
+    ```
 4. Abre la interfaz de Mage en tu navegador:
     ```markdown
     http://localhost:6789
