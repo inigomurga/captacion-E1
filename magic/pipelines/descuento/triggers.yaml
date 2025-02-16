@@ -1,0 +1,14 @@
+triggers:
+- description: null
+  envs: []
+  last_enabled_at: 2025-02-16 20:53:47.636676
+  name: triggerDescuento
+  pipeline_uuid: descuento
+  schedule_interval: '* * * * *'
+  schedule_type: time
+  settings: null
+  sla: null
+  start_time: 2025-02-16 20:53:00
+  status: active
+  token: 4f9fce73bba64258b28b076b5d4f16a1
+  variables: {}
