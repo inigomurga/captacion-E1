@@ -12,7 +12,7 @@ Para el diseño del docker-compose hemos tenido en cuenta las características m
 
 2. Creación de una tabla en PostgreSQL
 
-Tras construir y ejecutar los contenedores, accedemos a PostgreSQL con las credenciales específicas y basándonos en una base de datos de una tienda creamos una tabla e insertamos los datos pertinentes.
+Tras construir y lanzar los contenedores, accedemos a PostgreSQL con las credenciales específicas y basándonos en una base de datos de una tienda creamos una tabla e insertamos los datos pertinentes.
 
 3. Captación en MAGE 
 
@@ -28,19 +28,41 @@ Una vez que tenemos la tabla con los datos, creamos un pipeline con tres etapas 
     ```bash
     cd captacion-E1
     ```
-3. Construir y ejecutar los contenedores Docker:
+3. Construir y lanza los contenedores Docker:
     ```bash
     docker-compose up -d
     ```
 
 ## Uso
 
-1. Abre la interfaz de Mage en tu navegador:
+1. Accede a PostgreSQL:
+```bash
+    docker exec -it postgres psql -U usuario -d dbproyecto
+```
+2. Crea la tabla:
+```bash
+    create table productos ( id integer primary key, nombre varchar(30), precio integer);
+```
+3. Inserta los datos:
+```bash
+    insert into productos values  
+(1, 'Móvil', 750),
+(2, 'Auriculares', 120),
+(3, 'Portátil', 1200),
+(4, 'Monitor', 300),
+(5, 'Teclado', 50),
+(6, 'Ratón', 30),
+(7, 'Impresora', 200),
+(8, 'Tablet', 500),
+(9, 'Cámara', 900),
+(10, 'Altavoces', 150);
+```
+4. Abre la interfaz de Mage en tu navegador:
     ```markdown
     http://localhost:6789
-    ```
-2. Crea un nuevo pipeline y añade las etapas de lectura, transformación y escritura.
-3. Ejecuta el pipeline y revisa los resultados en la base de datos PostgreSQL.
+    ```  
+5. Crea un nuevo pipeline y añade las etapas de lectura, transformación y escritura.
+6. Ejecuta el pipeline y revisa los resultados en la base de datos PostgreSQL.
 
 ## Configuración de Docker Compose
 
@@ -89,7 +111,7 @@ services:
 Para mejorar el reto hemos tomado una serie de decisiones a la hora de realizar el docker-compose:
 
 * Utilizar un tag en la imagen de PostgresSQL, puesto que de esta forma aseguramos que los servicios funcionen evitando conflictos con futuras versiones. 
-* La persistencia de los datos tanto en el servicio de PostgresSQL como en el de MAGE a través de los volúmenes especificados en el docker-compose.
+* La persistencia de los datos en el servicio de MAGE a través del volumen especificado en el docker-compose.
 * Incluir una política de reinicio mejora la fiabilidad y disponibilidad del servicio, reiniciandose en el caso de que el contenedor falle.
 
 
@@ -97,8 +119,10 @@ Para mejorar el reto hemos tomado una serie de decisiones a la hora de realizar 
 
 Durante el reto hemos tenido problemas con el flujo de código entre los integrantes, esto se ha generado por estar poco acostumbrados al uso de git. Por lo que, esperamos ir mejorando mientras avanzamos en la asignatura.
 
-A su vez, el hecho de estar continuamente metiendo los datos tanto en postgres como en mage se nos hizo pesado, encontrando la mejora de persistencia de datos que nos ha ahorrado bastante tiempo.
+A su vez, el hecho de estar continuamente metiendo los datos en postgres se nos hizo pesado ya que no hemos conseguido implementar un volumen que persista la información de la tabla.
 
 ## Alternativas posibles
 
 Implementar algún servicio de seguridad, puesto que cualquiera puede acceder a los servicios.
+
+Incluir la persistencia de datos en el contenedor de postgres para no tener que estar creando las tablas continuamente.
